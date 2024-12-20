@@ -1,0 +1,77 @@
+<h1>Gestion des Questions</h1>
+
+<!-- Affichage des messages d'erreur ou de succès -->
+<?php if (!empty($error)): ?>
+    <p class="error">Erreur : <?= htmlspecialchars($error) ?></p>
+<?php endif; ?>
+
+<?php if (!empty($success)): ?>
+    <p class="success">Succès : <?= htmlspecialchars($success) ?></p>
+<?php endif; ?>
+
+<!-- Formulaire de création de question -->
+<h2>Ajouter une Question</h2>
+<form method="POST">
+    <label for="content">Question :</label>
+    <input type="text" name="content" id="content" required>
+
+    <label for="is_first">Première question :</label>
+    <input type="checkbox" name="is_first" id="is_first">
+
+    <button type="submit" name="create">Ajouter</button>
+</form>
+
+<!-- Liste des questions -->
+<h2>Liste des Questions</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Question</th>
+            <th>Première</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($questions as $question): ?>
+            <!-- Affiche chaque question avec une ancre -->
+            <tr id="question-<?= htmlspecialchars($question['id']) ?>">
+                <td><?= htmlspecialchars($question['id']) ?></td>
+                <td><?= htmlspecialchars($question['content']) ?></td>
+                <td><?= $question['is_first'] ? 'Oui' : 'Non' ?></td>
+                <td>
+                    <!-- Actions pour modifier ou supprimer -->
+                    <form method="POST">
+                        <input type="hidden" name="id" value="<?= htmlspecialchars($question['id']) ?>">
+                        <button type="submit" name="delete">Supprimer</button>
+                    </form>
+                </td>
+            </tr>
+
+            <!-- Affiche les réponses sous chaque question -->
+            <?php if (!empty($question['answers'])): ?>
+                <tr>
+                    <td colspan="4">
+                        <ul>
+                            <?php foreach ($question['answers'] as $answer): ?>
+                                <li>
+                                    <?= htmlspecialchars($answer['content']) ?>
+                                    <!-- Lien vers la prochaine question si next_question_id existe -->
+                                    <?php if (!empty($answer['next_question_id'])): ?>
+                                        <a href="admin.php#question-<?= htmlspecialchars($answer['next_question_id']) ?>">
+                                            Aller à la question <?= htmlspecialchars($answer['next_question_id']) ?>
+                                        </a>
+                                    <?php endif; ?>
+                                </li>
+                            <?php endforeach; ?>
+                        </ul>
+                    </td>
+                </tr>
+            <?php else: ?>
+                <tr>
+                    <td colspan="4">Aucune réponse disponible.</td>
+                </tr>
+            <?php endif; ?>
+        <?php endforeach; ?>
+    </tbody>
+</table>

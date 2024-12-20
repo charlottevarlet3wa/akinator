@@ -1,0 +1,15 @@
+<h1>QUIZ</h1>
+
+<p>Question</p>
+
+<form method="post">
+
+    <?php foreach ($options as $i => $option) : ?>
+
+        <input type="radio" id="answer-<?= htmlspecialchars($option['id']) ?>" name="answer" value="<?= htmlspecialchars($option['id']) ?>" <?= $i === 0 ? 'checked' : '' ?>>
+        <label for="answer-<?= htmlspecialchars($option['id']) ?>"><?= htmlspecialchars($option['content']) ?></label>
+
+    <?php endforeach; ?>
+
+    <button type="submit">Valider</button>
+</form>

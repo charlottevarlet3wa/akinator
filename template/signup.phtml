@@ -1,0 +1,26 @@
+<h1>Inscription</h1>
+
+<form method="post">
+
+    <label for="username">
+        Nom d'utilisateur
+        <input id="username" name="username" type="text" required>
+    </label>
+
+    <label for="email">
+        Email
+        <input id="email" name="email" type="email" required>
+    </label>
+
+    <label for="password">
+        Mot de passe
+        <input id="password" name="password" type="password" required>
+    </label>
+
+    <button class="btn btn-primary" type="submit">S'inscrire</button>
+
+    <?php if (!empty($error)) : ?>
+        <p class="error"><?= htmlspecialchars($error) ?></p>
+    <?php endif ?>
+
+</form>

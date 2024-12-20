@@ -1,0 +1,27 @@
+<main id="login_page" class="flex-column justify-center align-center">
+
+    <h1>Connexion</h1>
+
+    <form method="POST">
+
+        <label for="email">
+            Email
+            <input id="email" name="email" type="email" required>
+        </label>
+
+        <label for="password">
+            Mot de passe
+            <input id="password" name="password" type="password" required>
+        </label>
+
+        <button type="submit">Se connecter</button>
+
+        <?php if (!empty($error)) : ?>
+            <p class="error">
+                <?= htmlspecialchars($error) ?>
+            </p>
+        <?php endif ?>
+
+    </form>
+
+</main>

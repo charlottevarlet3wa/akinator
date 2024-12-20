@@ -1,0 +1,25 @@
+<h1><?= htmlspecialchars($user['username']) ?></h1>
+
+<form method="POST">
+    <label for="username">Nom d'utilisateur :</label>
+    <input type="text" name="username" id="username" value="<?= $user['username'] ?>" required>
+
+    <label for="email">Email :</label>
+    <input type="email" name="email" id="email" value="<?= $user['email'] ?>" required>
+
+    <button type="submit">Modifier</button>
+</form>
+
+<form method="POST">
+    <label for="current-password">Mot de passe actuel</label>
+    <input type="password" name="current_password" id="current-password" required>
+
+    <label for="new-password">Nouveau mot de passe</label>
+    <input type="password" name="new_password" id="new-password" required>
+
+    <button type="submit">Changer de mot de passe</button>
+</form>
+
+<p class="error"><?= !empty($error) ? htmlspecialchars($error) : "" ?></p>
+
+<button onclick="<? deleteUserById($user['id']) ?>">Supprimer le compte</button>
