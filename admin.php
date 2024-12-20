@@ -2,6 +2,7 @@
 
 require_once './repository/questionRepository.php';
 require_once './repository/answerRepository.php';
+require_once './repository/resultRepository.php';
 require_once './utils/auth.php';
 require_once './utils/functions.php';
 
@@ -64,8 +65,11 @@ if (!empty($_POST)) {
 }
 
 $questions = getQuestionsAndAnswers();
+$results = getResults();
 
-var_dump($questions[0]);
+var_dump($results);
+
+// var_dump($questions[0]);
 
 $template = './template/admin.phtml';
 include_once './template/layout/main.phtml';

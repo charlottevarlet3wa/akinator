@@ -12,3 +12,12 @@ function getResultById(int $resultId): array|bool
 
     return $query->fetch();
 }
+
+function getResults(): array|bool
+{
+    $sql = 'SELECT * FROM result';
+
+    $query = getConnection()->query($sql);
+
+    return $query->fetchAll();
+}
